@@ -16,7 +16,7 @@
                                             E-Mail:
                                         </label>
                                         <div class="col-md-8">
-                                            <input type="text" id="email" class="form-control" name="email"
+                                            <input type="email" id="email" class="form-control" name="email"
                                                 value="{{ old('email') }}" required autofocus>
                                             @error('email')
                                                 <div class="mt-2 alert alert-danger" role="alert">
@@ -50,6 +50,7 @@
                         </div>
                     @endguest
                     @auth
+                        <h2>O formulário de login só aparece se você estiver deslogado</h2>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
