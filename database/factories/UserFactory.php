@@ -10,6 +10,10 @@ use Illuminate\Support\Str;
  */
 class UserFactory extends Factory
 {
+    public function withFaker()
+    {
+        return \Faker\Factory::create('pt_BR');
+    }
     /**
      * Define the model's default state.
      *
@@ -18,8 +22,17 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->name(),
+            'nome_completo' => $this->faker->name(),
+            'cpf' => $this->faker->numerify('###.###.###-##'),
             'email' => fake()->unique()->safeEmail(),
+            'telefone' => $this->faker->numerify('(##) 9####-####'),
+            'cep' => $this->faker->numerify('#####-###'),
+            'endereco' => $this->faker->streetName(),
+            'numero' => $this->faker->buildingNumber(),
+            'complemento' => $this->faker->secondaryAddress(),
+            'bairro' => $this->faker->city(),
+            'cidade' => $this->faker->city(),
+            'estado' => collect(['MG', 'DF', 'SP', 'RJ'])->random(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
